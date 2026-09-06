@@ -1,0 +1,23 @@
+services:
+  config-init:
+    image: busybox
+    volumes:
+      - "./config:/config"
+    command: sh -c "mkdir -p /config && chown -R 1000:1000 /config"
+
+  atuin:
+    restart: always
+    image: ghcr.io/atuinsh/atuin:18.21.0
+    command: start
+    volumes:
+      - "./config:/config"
+    ports:
+      - 30530:8888
+    environment:
+      ATUIN_HOST: "0.0.0.0"
+      ATUIN_OPEN_REGISTRATION: "false"
+      ATUIN_DB_URI: "sqlite:///config/atuin.db"
+      RUST_LOG: info,atuin_server=debug
+    depends_on:
+      config-init:
+        condition: service_completed_successfully
