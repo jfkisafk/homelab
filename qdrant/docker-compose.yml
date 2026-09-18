@@ -1,0 +1,11 @@
+services:
+  qdrant:
+    restart: always
+    image: qdrant/qdrant:v1.19.0
+    environment:
+      QDRANT__SERVICE__API_KEY: "${QDRANT_API_KEY:?QDRANT_API_KEY is required}"
+    volumes:
+      - "./storage:/qdrant/storage"
+    ports:
+      - 30633:6333
+      - 30634:6334
