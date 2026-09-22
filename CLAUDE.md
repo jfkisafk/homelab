@@ -11,6 +11,7 @@ a `docker-compose.yml`. No build, lint, or test tooling.
 - **atuin/** — Shell history sync server ([docs](https://docs.atuin.sh/self-hosting/)),
   SQLite-backed. Config and the DB live in the gitignored `atuin/config/`; only
   `docker-compose.yml` and `.gitignore` are tracked per service.
+- **valkey/** — In-memory KV store. Data lives in the gitignored `valkey/data/`.
 
 ## Adding a service
 
