@@ -6,4 +6,4 @@ services:
     volumes:
       - "./data:/data"
     ports:
-      - 30379:6379
+      - 127.0.0.1:30379:6379

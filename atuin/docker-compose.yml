@@ -12,7 +12,7 @@ services:
     volumes:
       - "./config:/config"
     ports:
-      - 30530:8888
+      - 127.0.0.1:30530:8888
     environment:
       ATUIN_HOST: "0.0.0.0"
       ATUIN_OPEN_REGISTRATION: "false"

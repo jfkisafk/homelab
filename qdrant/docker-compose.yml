@@ -7,5 +7,22 @@ services:
     volumes:
       - "./storage:/qdrant/storage"
     ports:
-      - 30633:6333
-      - 30634:6334
+      - 127.0.0.1:30633:6333
+
+  memory-mcp:
+    restart: always
+    image: ghcr.io/astral-sh/uv:python3.12-bookworm-slim
+    command: uvx mcp-server-qdrant==0.8.1 --transport streamable-http
+    environment:
+      QDRANT_URL: http://qdrant:6333
+      QDRANT_API_KEY: "${QDRANT_API_KEY:?QDRANT_API_KEY is required}"
+      COLLECTION_NAME: agent-memory
+      FASTMCP_HOST: 0.0.0.0
+      FASTMCP_PORT: 8000
+    volumes:
+      # Persists the FastEmbed model and uv packages across restarts
+      - "./cache:/root/.cache"
+    ports:
+      - 127.0.0.1:30800:8000
+    depends_on:
+      - qdrant
