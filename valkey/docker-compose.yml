@@ -1,7 +1,7 @@
 services:
   valkey:
     restart: always
-    image: valkey/valkey:9.1.2-alpine
+    image: valkey/valkey:9.1.3-alpine
     command: ["--requirepass", "${VALKEY_PASSWORD:?VALKEY_PASSWORD is required}"]
     volumes:
       - "./data:/data"
